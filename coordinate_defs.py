@@ -8,6 +8,19 @@
 :---------------------------------------------------------------------:
 """
 
+def dd_dmm(dd, cal_long=True):
+    """decimal degrees to deg dec min"""
+    deg_sign = u'\N{DEGREE SIGN}'
+    deg = int(dd)
+    if deg < 0:
+        quad = ['S', 'W'][cal_long]
+        deg = abs(deg)
+    else:
+        quad = ['N', 'E'][cal_long]
+    minsec = divmod((deg - dd)*60, 60)[-1]
+    frmt = "{}{} {:0.2f}' {}".format(deg, deg_sign, minsec, quad)
+    return frmt
+
 
 def ddm_ddd(a, sep=" "):
     """ convert degree, decimal minute string to decimal degrees

@@ -113,7 +113,7 @@ def strip_num(field_name):
 field name, threshold value in the code block, modify expression to suite,
 if_elif_else(!test_fld!,5)    modify the code within the return section
 """
-def if_elif_else(field_name,value):
+def if_elif_else(field_name, value):
     if field_name <= value:
         return value     # ie (1.0 + (field_name/2.0))
     elif field_name <= 10:
@@ -167,24 +167,25 @@ def remove_part(field_name,index=-1,sep=" "):
             out_str += (i + " ")
     return out_str.rstrip()
 
+
 """------------------------------------------
 Label grid cells like excel
-
 """
-import string  
-c=-1
-r = 0  
-def code_grid(rows=1,cols=1):  
-  c += 1
-  global c, r
-  UC = list(string.ascii_uppercase)
-  if c >= cols:
-      c = 0
-      r += 1
-  label = UC[c]+str(r)  
-  return label 
+import string
+c = -1
+r = 0
 
- 
+def code_grid(rows=1, cols=1):
+    global c, r
+    c += 1
+    UC = list(string.ascii_uppercase)
+    if c >= cols:
+        c = 0
+        r += 1
+    label = UC[c] + str(r)
+    return label
+
+
 # (4) Date-time
 
 # arcpy.time.ParseDateTimeString(!FIELD1!) + datetime.timedelta(hours=1)
@@ -196,7 +197,7 @@ import datetime
 
 #Math related
 
-"""-----------------------------------------
+""" -----------------------------------------
 Return a random number in the range 0-1
 randomNum()  #enter into the expression box
 """
@@ -274,7 +275,7 @@ def count_pnts(shape):
     return num_pnts
 
 
-#-- Point features ----------------------------------------
+# -- Point features ----------------------------------------
 #  References
 #     https://geonet.esri.com/message/557195#557195
 #     https://geonet.esri.com/message/557196#557196
@@ -285,21 +286,27 @@ input:      shape field, origin x,y
 returns:    distance to the specified point
 expression: dist_to(!Shape!, x, y)
 """
+
 def dist_to(shape, from_x, from_y):
     x = shape.centroid.X
     y = shape.centroid.Y
     distance = math.sqrt((x - from_x)**2 + (y - from_y)**2)
     return distance
 
-"""-----------------------------------------
+
+""" -----------------------------------------
 dist_between(shape)
 input:      shape field
 returns:    distance between successive points
 expression: dist_between(!Shape!)
 """
-x0 = 0.0;  y0 = 0.0
+
+x0 = 0.0
+y0 = 0.0
+
 def dist_between(shape):
-    global x0;  global y0
+    global x0
+    global y0
     x = shape.centroid.X
     y = shape.centroid.Y
     if x0 == 0.0 and y0 == 0.0:
@@ -310,13 +317,17 @@ def dist_between(shape):
     y0 = y
     return distance
 
+
 """-----------------------------------------
 dist_cumu(shape)
 input:      shape field
 returns:    cumulative distance between points
 expression: dist_cumu(!Shape!)
 """
-x0 = 0.0;  y0 = 0.0;  distance = 0.0
+
+x0 = 0.0
+y0 = 0.0
+distance = 0.0
 def dist_cumu(shape):
     global x0
     global y0
@@ -424,10 +435,10 @@ def pnt_along(shape, value, use_fraction, XorY):
     else:
         return pnt.centroid.Y
 
-#--Polygon
+# --Polygon
 
 
-#--Shapes in general
+# --Shapes in general
 ##def shape_shift(shape,dX=0,dY=0):
 ##    """ shape_shift(!Shape!,0,0)
 ##    __esri_field_calculator_splitter__
@@ -465,9 +476,9 @@ def shift_features(in_features, x_shift=None, y_shift=None):
     return
 
 
-#shape_shift(!SHAPE@!,0,0)
+# shape_shift(!SHAPE@!,0,0)
 
-#formatting
+# formatting
 """partition a string or number into parts in a text field
 !field_name!   in the expression box"""
 def partition(field_name):
